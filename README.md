@@ -12,6 +12,12 @@ However, sustainability information can be difficult to access and overwhelming 
 
 This project is a trustworthy AI sustainability assistant that helps users make more meaningful environmental decisions using grounded and reliable AI-generated guidance.
 
+## How to run this project
+
+1- Download the project.
+2- Run the following command "pip install -r requirement.txt"  
+3- Run the command "streamlit run main.py"
+
 ---
 
 # 2. Positive Impact
