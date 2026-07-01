@@ -14,9 +14,10 @@ This project is a trustworthy AI sustainability assistant that helps users make 
 
 ## How to run this project
 
-1- Download the project.
+1- Download the project.  
 2- Run the following command "pip install -r requirement.txt"  
-3- Run the command "streamlit run main.py"
+3- In ingest.py, integrate your Open AI API key here *os.environ["OPENAI_API_KEY"] = ""*  
+4- Run the command "streamlit run main.py"
 
 ---
 
