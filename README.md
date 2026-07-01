@@ -324,7 +324,8 @@ These results indicate that answer relevance is strong, while groundedness and r
 
 # Demo
 
-*To be added.*
+![Demo](visual1.png)
+![Demo](visual2.png)
 
 ---
 
