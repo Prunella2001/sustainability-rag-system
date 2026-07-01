@@ -313,10 +313,10 @@ Current metrics:
 
 | Metric            | Value |
 | ----------------- | ----- |
-| Groundedness      | 6.653 |
-| Context Relevance | 0.78  |
-| Answer Relevance  | 1.00  |
-| Average Latency   | ~55s  |
+| Groundedness      | 6.75  |
+| Context Relevance | 0.83  |
+| Answer Relevance  | 0.75  |
+| Average Latency   | ~82s  |
 
 These results indicate that answer relevance is strong, while groundedness and retrieval quality still have room for improvement through dataset expansion and retrieval optimization.
 
@@ -326,6 +326,7 @@ These results indicate that answer relevance is strong, while groundedness and r
 
 ![Demo](visual1.png)
 ![Demo](visual2.png)
+![Demo](visual3.png)
 
 ---
 
