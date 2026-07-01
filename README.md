@@ -113,39 +113,44 @@ This module produces the chunks and vector store required for retrieval.
 
 ### Purpose
 
-This module retrieves the most relevant sustainability information using hybrid retrieval techniques.
+Retrieve the most relevant sustainability knowledge from heterogeneous web sources while balancing semantic understanding, keyword matching, and ranking quality.
 
 ### Implementation
 
-* Semantic retrieval
-* BM25 keyword retrieval
-* Ensemble retrieval
-* CrossEncoder reranking
+The retrieval pipeline combines different retrieval techniques:
 
-Different retrieval weight combinations were tested.
+* Parent–Child Retrieval: The knowledge base is in fact web articles with varying lengths and structures. Choosing an appropriate chunking strategy became an important design decision because it directly affected embedding quality and retrieval performance. We therefor decided that we would split them into large parent chunks (≈1500 characters) and smaller child chunks (≈250 characters). Child chunks are embedded for precise semantic search, while their corresponding parent chunks are returned to provide richer context to the language model.  
+* Semantic Retrieval (FAISS + BGE embeddings): to capture conceptual similarity beyond exact keyword matching.  
+* BM25 Retrieval: it complements semantic search by improving retrieval of documents containing important domain-specific terminology.  
+* Weighted Ensemble Retrieval: it combines lexical and semantic retrieval using different weight configurations evaluated experimentally.  
+* Cross-Encoder Reranking: it reorders retrieved documents using the BAAI/bge-reranker-v2-m3 model before selecting the final context provided to the LLM.  
 
-Evaluation was performed using:
+### Retrieval Evaluation
+
+Different ensemble weight combinations were evaluated using a manually constructed evaluation set consisting of representative sustainability questions and expected source documents. Evaluation metrics included:
 
 * Hit Rate
 * Mean Reciprocal Rank (MRR)
 
-The final retrieval configuration was selected by prioritizing hit rate while relying on reranking to improve document ordering.
+The final configuration prioritized Hit Rate to maximize the probability of retrieving relevant evidence, while the Cross-Encoder reranker optimized the final ordering of retrieved documents.
 
 ### Methods & Skills
 
 * Embeddings
-* Information Retrieval
-* Hybrid Search
+* Hybrid Information Retrieval
+* Parent–Child Retrieval
+* Information Retrieval Experimentation
+* Embedding-based Search
 * Retrieval Evaluation
 * Ranking & Reranking
-* FAISS
+* FAISS Vector Search
 * BM25
 
 ### Challenges
 
-The main challenge was designing and evaluating the weight optimization experiment.
+One of the main design challenges was selecting an effective chunking strategy for heterogeneous web content. Because the knowledge base consisted of long web articles with varying structures rather than standardized datasets, chunk size directly influenced embedding quality, retrieval precision, and the amount of context supplied to the language model. A Parent–Child retrieval strategy was adopted to balance fine-grained semantic retrieval with sufficiently rich contextual information for answer generation.  
 
-Several selection approaches were explored before choosing a strategy prioritizing hit rate over MRR.
+A second challenge was tuning the hybrid retrieval system. Rather than relying on default ensemble weights, multiple BM25/semantic retrieval combinations were evaluated using retrieval metrics before applying Cross-Encoder reranking to improve document ordering.
 
 ### Result
 
